@@ -1,5 +1,9 @@
 # Fullstack-JavaScript
- 4th Semester Fullstack JavaScript - Malte Hviid-Magnussen cph-mh748
+## 4. Semester - Nicklas Dupont cph-nd76
 
-1. [Week 1 Exercises](https://github.com/MalteMagnussen/Fullstack-JavaScript/tree/master/week1)
-2. [Week 2 Exercises](https://github.com/MalteMagnussen/Fullstack-JavaScript/tree/master/week2/Exercises)
+### Hand ins
+1. [Week 5 Exercises](https://github.com/TheDanishWonder/FullstackJavaScript/tree/master/Week%205)
+2. [Week 6 Exercises](https://github.com/TheDanishWonder/FullstackJavaScript/tree/master/Week%206)
+3. [Week 7 Exercises](https://github.com/TheDanishWonder/FullstackJavaScript/tree/master/Week%207)
+4. [Week 8 Exercises](https://github.com/TheDanishWonder/FullstackJavaScript/tree/master/Week%208)
+5. [Week 9 Exercises](https://github.com/TheDanishWonder/FullstackJavaScript/tree/master/Week%209)
