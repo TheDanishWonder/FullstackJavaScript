@@ -176,10 +176,10 @@ describe("Verify /gameapi/getPostIfReached", () => {
     expect(result.length).to.be.equal(0);
   });
 
-  it("Should find team2, since credential are wrong", async function() {
+  it("Should NOT find team2, since credential are wrong", async function() {
     const newPosition = {
       userName: "t1",
-      password: "secret",
+      password: "sec",
       lat: 55.77,
       lon: 12.48,
       distance: DISTANCE_TO_SEARCH
@@ -195,8 +195,8 @@ describe("Verify /gameapi/getPostIfReached", () => {
     const result = await fetch(`${URL}/gameapi/nearbyplayers`, config).then(r =>
       r.json()
     );
-    expect(result.length).to.be.equal(1);
-    expect(result.map((p: { password: string }) => p.password)).to.not.equal("secret");
+    expect(result.message).to.be.equal("Wrong username or password");
+    expect(result.code).to.be.equal(403);
   });
 
 });
