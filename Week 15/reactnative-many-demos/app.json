@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "exday1-navigator",
+    "slug": "exday1-navigator",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.gif",
+    "splash": {
+      "image": "./assets/icon.gif",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+    
+  }
+}
