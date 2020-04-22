@@ -31,7 +31,7 @@ export default class UserFacade {
     let newUser = { ...user, password: hash };
     try {
       const result = await userCollection.insertOne(newUser);
-      return "User was added";
+      return result + " was added";
     } catch (err) {
       if (err.code === 11000) {
         throw new ApiError("This userName is already taken", 400);
