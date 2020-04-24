@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "React Native Demo App",
-    "slug": "react-native-demo-app",
+    "name": "client-location-noDB",
+    "slug": "client-location-noDB",
     "platforms": [
       "ios",
       "android",
@@ -9,11 +9,11 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.gif",
+    "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/icon.gif",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,7 +23,6 @@
     ],
     "ios": {
       "supportsTablet": true
-    },
-    "description": "This is a demo app for a simple react native mobile application"
+    }
   }
 }
