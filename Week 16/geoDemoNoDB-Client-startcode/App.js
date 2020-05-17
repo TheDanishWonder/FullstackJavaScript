@@ -7,6 +7,7 @@ import {
   TouchableHighlight,
   Alert,
   TextInput,
+  Dimensions
 } from "react-native";
 import { Icon } from "react-native-elements";
 import * as Location from "expo-location";
@@ -31,14 +32,19 @@ export default App = () => {
   const [region, setRegion] = useState(null);
   const [serverIsUp, setServerIsUp] = useState(false);
   const [status, setStatus] = useState("");
+  const [login, setLogin] = useState(false);
+  const [distance, setDistance] = useState("100");
+  const [otherPlayers, setOtherPlayers] = useState([]); 
   const [credentials, setCredentials] = useState({
     userName: "t1",
     password: "secret",
+    latitude: 55.775919,
+    longitude: 12.573359
   });
-  const [login, setLogin] = useState(false);
-  const [distance, setDistance] = useState("100000");
-  const [otherPlayers, setOtherPlayers] = useState([]);
   let mapRef = useRef(null);
+
+  const SCREEN_WIDTH = Math.round(Dimensions.get('window').width); 
+  const SCREEN_HEIGHT = Math.round(Dimensions.get('window').height);
 
   const closeLogin = () => {
     setLogin(false);
@@ -52,31 +58,13 @@ export default App = () => {
     getGameArea();
   }, []);
 
-  const getCurrentPosition = async () => {
-    let location = await Location.getCurrentPositionAsync({
-      enableHighAccuracy: true,
-    });
-
-    setPosition({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-    });
-
-    setRegion({
-      latitude: location.coords.latitude,
-      longitude: location.coords.longitude,
-      latitudeDelta: 0.0922,
-      longitudeDelta: 0.0421,
-    });
-  };
-
   const findNearbyPlayers = async () => {
     const positions = await facade.findNearbyPlayers(
       credentials.userName,
       credentials.password,
-      position.latitude,
-      position.longitude,
-      distance
+      Number(credentials.latitude),
+      Number(credentials.longitude),
+      Number(distance)
     );
     setOtherPlayers(positions);
   };
@@ -172,7 +160,7 @@ export default App = () => {
 
   const info = serverIsUp ? status : " Server is not up";
   return (
-    <View style={{ flex: 1, paddingTop: 30, paddingBottom: 0 }}>
+    <View style={{ flex: 1, paddingTop: 30, paddingBottom: 0, height: SCREEN_HEIGHT, width: SCREEN_WIDTH }}>
       {!region && <Text style={styles.fetching}>.. Fetching data</Text>}
 
       <Login
@@ -206,21 +194,20 @@ export default App = () => {
 
           {/*App MapView.Marker to show users current position*/}
           <MapView.Marker
-            title="This is your position"
+            title="This is your teams position"
             pinColor="blue"
             coordinate={{
-              longitude: position.longitude,
-              latitude: position.latitude,
+              longitude: Number(credentials.longitude),
+              latitude: Number(credentials.latitude),
             }}
           />
-          {otherPlayers.length > 0 &&
-            otherPlayers.map((player, index) => (
+          {otherPlayers.map((player, i) => (
               <MapView.Marker
-                key={index}
-                title={`Position of ${player.name}`}
+                key={i}
+                title={`${player.name}`}
                 coordinate={{
-                  longitude: player.lon,
                   latitude: player.lat,
+                  longitude: player.lon,
                 }}
               />
             ))}
@@ -229,31 +216,21 @@ export default App = () => {
 
       <Text
         style={{
-          flex: 3,
-          textAlign: "center",
-          fontWeight: "bold",
-          marginTop: 400,
-          backgroundColor: "rgba(0,0,0,0.2)",
-        }}
-      >
-        Players in range: {JSON.stringify(otherPlayers)}
-      </Text>
-      <Text
-        style={{
           flex: 1,
+          marginTop: SCREEN_HEIGHT - 375,
           textAlign: "center",
           fontWeight: "bold",
           backgroundColor: "rgba(0,0,0,0.2)",
         }}
       >
-        Your position (lat,long):
+        Coordinates
       </Text>
       <Text style={styles.text}>
-        {position.latitude}, {position.longitude}
+        {credentials.latitude}, {credentials.longitude}
       </Text>
       <Text style={styles.text}>{info}</Text>
       <Text style={styles.text}>
-        Username: {credentials.userName}, Password: {credentials.password}
+        Logged in as: {credentials.userName}
       </Text>
       <Text style={styles.text}>Search Radius: {distance}</Text>
 
@@ -280,7 +257,7 @@ export default App = () => {
           name="location-arrow"
           type="font-awesome"
           color="#f50"
-          onPress={getCurrentPosition}
+          onPress={getLocationAsync}
           size={17}
         />
       </View>

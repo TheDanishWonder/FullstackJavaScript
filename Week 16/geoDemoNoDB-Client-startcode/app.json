@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "client-location-noDB",
-    "slug": "client-location-noDB",
+    "name": "GeoGame",
+    "slug": "nicklasdupontgeoapp",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "school project",
+    "githubUrl": "https://github.com/TheDanishWonder/GeoGameApp"
   }
 }
